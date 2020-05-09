@@ -75,7 +75,7 @@ public class LogFilterMain extends JFrame implements INotiEvent
 {
     private static final long serialVersionUID           = 1L;
 
-    static final String       LOGFILTER                  = "LogFilter";
+    static final String       LOGFILTER                  = "UnisocLogFilter";
     static final String       VERSION                    = "Version 1.8";
     final String              COMBO_ANDROID              = "Android          ";
     final String              COMBO_IOS                  = "ios";
@@ -995,7 +995,9 @@ public class LogFilterMain extends JFrame implements INotiEvent
     {
         JPanel optionFilter = new JPanel(new BorderLayout());
 
-        optionFilter.add(getCmdPanel(), BorderLayout.WEST);
+        // hidden Device Select
+        //optionFilter.add(getCmdPanel(), BorderLayout.WEST);
+
         optionFilter.add(getCheckPanel(), BorderLayout.EAST);
         optionFilter.add(getFilterPanel(), BorderLayout.CENTER);
 
@@ -1049,9 +1051,9 @@ public class LogFilterMain extends JFrame implements INotiEvent
             }
         });
 
-        JLabel jlProcessCmd = new JLabel("Cmd : ");
-        m_comboCmd = new JComboBox();
-        m_comboCmd.setPreferredSize( new Dimension( 180, 25) );
+        //JLabel jlProcessCmd = new JLabel("Cmd : ");
+        //m_comboCmd = new JComboBox();
+        //m_comboCmd.setPreferredSize( new Dimension( 180, 25) );
 //        m_comboCmd.setMaximumSize( m_comboCmd.getPreferredSize()  );
 //        m_comboCmd.setSize( 20000, m_comboCmd.getHeight() );
 //        m_comboCmd.addItem(ANDROID_THREAD_CMD);
@@ -1074,7 +1076,7 @@ public class LogFilterMain extends JFrame implements INotiEvent
 //            }
 //        });
 
-        m_btnClear = new JButton("Clear");
+        /* m_btnClear = new JButton("Clear");
         m_btnClear.setMargin(new Insets(0, 0, 0, 0));
         m_btnClear.setEnabled(false);
         m_btnRun = new JButton("Run");
@@ -1089,7 +1091,7 @@ public class LogFilterMain extends JFrame implements INotiEvent
         m_btnRun.addActionListener(m_alButtonListener);
         m_btnStop.addActionListener(m_alButtonListener);
         m_btnClear.addActionListener(m_alButtonListener);
-        m_tbtnPause.addActionListener(m_alButtonListener);
+        m_tbtnPause.addActionListener(m_alButtonListener); */
 
         optionWest.add(jlFontType);
         optionWest.add(m_jcFontType);
@@ -1100,12 +1102,12 @@ public class LogFilterMain extends JFrame implements INotiEvent
         optionWest.add(m_comboEncode);
         optionWest.add(jlGoto);
         optionWest.add(tfGoto);
-        optionWest.add(jlProcessCmd);
+        /* optionWest.add(jlProcessCmd);
         optionWest.add(m_comboCmd);
         optionWest.add(m_btnClear);
         optionWest.add(m_btnRun);
         optionWest.add(m_tbtnPause);
-        optionWest.add(m_btnStop);
+        optionWest.add(m_btnStop); */
 
         optionMenu.add(optionWest, BorderLayout.WEST);
         return optionMenu;
@@ -1200,8 +1202,11 @@ public class LogFilterMain extends JFrame implements INotiEvent
                         if(strLine != null && !"".equals(strLine.trim()))
                         {
                             LogInfo logInfo = m_iLogParser.parseLog(strLine);
-                            logInfo.m_strLine = "" + nIndex++;
-                            addLogInfo(logInfo);
+
+                            if (logInfo != null) {
+                                logInfo.m_strLine = "" + nIndex++;
+                                addLogInfo(logInfo);
+                            }
                         }
                     }
                     runFilter();

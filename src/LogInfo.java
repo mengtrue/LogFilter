@@ -13,6 +13,7 @@ public class LogInfo
     
     boolean                 m_bMarked;
     String                  m_strBookmark   = "";
+    String                  m_unisocFlag    = "";
     String                  m_strDate       = "";
     String                  m_strLine       = "";
     String                  m_strTime       = "";
@@ -28,6 +29,7 @@ public class LogInfo
         T.d("=============================================");
         T.d("m_bMarked      = " + m_bMarked);
         T.d("m_strBookmark  = " + m_strBookmark);
+        T.d("m_unisocFlag   = " + m_unisocFlag);
         T.d("m_strDate      = " + m_strDate);
         T.d("m_strLine      = " + m_strLine);
         T.d("m_strTime      = " + m_strTime);
@@ -45,6 +47,8 @@ public class LogInfo
         {
             case LogFilterTableModel.COMUMN_LINE:
                 return m_strLine;
+            case LogFilterTableModel.COMUMN_UNISOCFLAG:
+                return m_unisocFlag;
             case LogFilterTableModel.COMUMN_DATE:
                 return m_strDate;
             case LogFilterTableModel.COMUMN_TIME:

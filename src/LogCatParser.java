@@ -64,7 +64,8 @@ public class LogCatParser implements ILogParser
 //04-17 09:01:18.910 D/LightsService(  139): BKL : 106
     public boolean isNormal(String strText)
     {
-        if(strText.length() < 22) return false;
+        //if(strText.length() < 22) return false;
+        if(strText.length() < 22 + 8) return false;
 
         String strLevel = (String)strText.substring(19, 21);
         if(strLevel.equals("D/")
@@ -81,9 +82,10 @@ public class LogCatParser implements ILogParser
 //04-20 12:06:02.125   146   179 D BatteryService: update start    
     public boolean isThreadTime(String strText)
     {
-        if(strText.length() < 34) return false;
+        //if(strText.length() < 34) return false;
+        if(strText.length() < 34 + 8) return false;
 
-        String strLevel = (String)strText.substring(31, 33);
+        String strLevel = (String)strText.substring(39, 41);
         if(strLevel.equals("D ")
                 || strLevel.equals("V ")
                 || strLevel.equals("I ")
@@ -148,6 +150,8 @@ public class LogCatParser implements ILogParser
         
         StringTokenizer stk = new StringTokenizer(strText, TOKEN_SPACE, false);
         if(stk.hasMoreElements())
+            logInfo.m_unisocFlag = stk.nextToken();
+        if(stk.hasMoreElements())
             logInfo.m_strDate = stk.nextToken();
         if(stk.hasMoreElements())
             logInfo.m_strTime = stk.nextToken();
@@ -204,9 +208,10 @@ public class LogCatParser implements ILogParser
             return getKernel(strText);
         else
         {
-            LogInfo logInfo = new LogInfo();
+            return null;
+            /*LogInfo logInfo = new LogInfo();
             logInfo.m_strMessage = strText;
-            return logInfo;
+            return logInfo;*/
         }
     }
 }
