@@ -86,7 +86,7 @@ public class LogCatParser implements ILogParser
         if(strText.length() < 34 + 8) return false;
 
         String strLevel = (String)strText.substring(39, 41);
-        if(strLevel.equals("D ")
+        /* if(strLevel.equals("D ")
                 || strLevel.equals("V ")
                 || strLevel.equals("I ")
                 || strLevel.equals("W ")
@@ -94,7 +94,8 @@ public class LogCatParser implements ILogParser
                 || strLevel.equals("F ")
                 )
             return true;
-        return false;
+        return false; */
+        return true;
     }
     
 //    <4>[19553.494855] [DEBUG] USB_SEL(1) HIGH set USB mode 
@@ -121,6 +122,8 @@ public class LogCatParser implements ILogParser
         LogInfo logInfo = new LogInfo();
         
         StringTokenizer stk = new StringTokenizer(strText, TOKEN_PID, false);
+        if(stk.hasMoreElements())
+            logInfo.m_unisocFlag = stk.nextToken();
         if(stk.hasMoreElements())
             logInfo.m_strDate = stk.nextToken();
         if(stk.hasMoreElements())
